@@ -1,0 +1,13 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  name: rails-pipeline-run-1
+spec:
+  pipelineRef:
+    name: rails-pipeline
+  params:
+    - name: IMAGE
+      value: docker.io/soumil22/rails-app:latest
+    - name: CONTEXT
+      value: git://github.com/Soumil2002/devops-ror-app.git
+
