@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rails-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rails
+  template:
+    metadata:
+      labels:
+        app: rails
+    spec:
+      containers:
+        - name: rails
+          image: soumil22/rails-app:latest
+          ports:
+            - containerPort: 3000
+          env:
+            - name: DATABASE_HOST
+              value: postgres
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rails-service
+spec:
+  selector:
+    app: rails
+  ports:
+    - port: 3000
+      targetPort: 3000
+
